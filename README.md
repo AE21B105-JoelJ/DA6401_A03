@@ -43,3 +43,6 @@ the additional supported arguents are as follows (both types attention and non-a
 - "--enc_cell" to determine the encoder cell type
 - "--dec_cell" to determine the decoder cell type
 - "--pre_trained" to tell whether to use pretrained
+
+# Organization of the Repository
+
