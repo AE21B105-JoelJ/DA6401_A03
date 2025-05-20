@@ -109,7 +109,6 @@ class Dataset_Tamil(Dataset):
         for t in range(len(output_word), self.max_dec_seq_len):
             decoder_input[t, self.output_token_index[" "]] = 1.0
 
-        # Ensure decoder_output is padded *after* last real target (t - 1 from above loop)
         for t in range(len(output_word) - 1, self.max_dec_seq_len):
             decoder_output[t, self.output_token_index[" "]] = 1.0
 
@@ -170,14 +169,13 @@ class Decoder(nn.Module):
         
 # Helper function
 def combine_directions(hidden):
-    # hidden shape: (num_layers * 2, B, H1)
     layers = []
-    for i in range(0, hidden.size(0), 2):  # 0,2,4,...
+    for i in range(0, hidden.size(0), 2):  
         fwd = hidden[i]
         bwd = hidden[i + 1]
-        combined = torch.cat((fwd, bwd), dim=-1)  # shape: (B, 2*H1)
+        combined = torch.cat((fwd, bwd), dim=-1)  
         layers.append(combined)
-    return torch.stack(layers)  # shape: (num_layers, B, 2*H1)
+    return torch.stack(layers)  
 
 
 class Seq2Seq(nn.Module):
@@ -234,8 +232,8 @@ class Seq2Seq(nn.Module):
                 states_dec = states_enc
 
         # Decoder gives the outputs batchwise
-        decoder_outputs, _ = self.decoder(DEC_IN, states_dec)  # (B, T, H)
-        logits = self.fc(decoder_outputs)                      # (B, T, Vocab)
+        decoder_outputs, _ = self.decoder(DEC_IN, states_dec)  
+        logits = self.fc(decoder_outputs)                   
         return logits
 
     def predict_greedy(self, batch):
@@ -277,12 +275,12 @@ class Seq2Seq(nn.Module):
 
         # Output to input
         for t in range(self.max_dec_seq_len):
-            out_step, states_dec = self.decoder(in_, states_dec)  # (B, 1, H)
-            logits_step = self.fc(out_step.squeeze(1))            # (B, V)
+            out_step, states_dec = self.decoder(in_, states_dec)  
+            logits_step = self.fc(out_step.squeeze(1))            
             final_out[:, t, :] = logits_step
 
             # Greedy argmax for next input
-            top1 = torch.argmax(logits_step, dim=1)               # (B,)
+            top1 = torch.argmax(logits_step, dim=1)               
             in_ = torch.zeros(batch_size, 1, len(self.output_index_token), device=self.device)
             in_[torch.arange(batch_size), 0, top1] = 1.0
 
@@ -323,7 +321,7 @@ def validate_seq2seq(model, val_loader, device, val_type = "greedy", beam_width=
                 decoder_output = model.predict_beam_search(batch, beam_width=beam_width)
 
             #print(decoder_output.shape)
-            pred_tokens = decoder_output.argmax(dim=2)#.view(DEC_OUT.size(0), DEC_OUT.size(1))
+            pred_tokens = decoder_output.argmax(dim=2)
             true_tokens = DEC_OUT.argmax(dim=2)
             #print(pred_tokens.shape)
             #print(true_tokens.shape)
