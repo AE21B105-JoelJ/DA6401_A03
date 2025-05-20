@@ -7,4 +7,39 @@ WandB Link : https://api.wandb.ai/links/A3_DA6401_DL/t5ookbc5
 
 # Packages Used
 - torch
-- 
+- argparse
+- scikit-learn
+- torchvision
+- numpy
+- pandas
+- plotly
+- seaborn
+- lightning
+- matplotlib
+- tqdm
+
+## Usage of the script
+To run the code use the following code (The external parameters are defaulted to best accuracy got!!!), for the non-attention run the python script named train_vanilla.py and for the attention module run the train_attention.py. Use the following command to run (note: pre_trained is set as true to use existing model file, set it as false if want to train a new model)
+
+```
+python train_vanilla.py --wandb_project project_name --wandb_entity entity_name
+```
+
+If you want to train the model and save it in the pretrained folder and add the path to the script as required.
+
+```
+python train_vanilla.py --wandb_project project_name --wandb_entity entity_name --pre_trained False
+```
+
+the additional supported arguents are as follows (both types attention and non-attention)
+- "--epochs" tells the Number of epochs to train the model
+- "--batch_size" tells  the Batch size used to train the network
+- "--dropout" tells the Dropout to applu at the convolutional layers before activation
+- "--learning_rate" tells the learning rate used in the gradient update
+- "--bi_directional" tells whether to apply bi-directionality
+- "--num_layers" to determine the number of layers
+- "--embed_dim" to determine the embedding dimension
+- "--hidden_size" to determine the hidden dimension
+- "--enc_cell" to determine the encoder cell type
+- "--dec_cell" to determine the decoder cell type
+- "--pre_trained" to tell whether to use pretrained
