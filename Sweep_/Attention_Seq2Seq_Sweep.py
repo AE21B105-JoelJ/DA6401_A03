@@ -107,7 +107,6 @@ class Dataset_Tamil(Dataset):
         for t in range(len(output_word), self.max_dec_seq_len):
             decoder_input[t, self.output_token_index[" "]] = 1.0
 
-        # Ensure decoder_output is padded *after* last real target (t - 1 from above loop)
         for t in range(len(output_word) - 1, self.max_dec_seq_len):
             decoder_output[t, self.output_token_index[" "]] = 1.0
 
@@ -238,7 +237,7 @@ class Attention_Seq2Seq(nn.Module):
         in_ = DEC_IN[:, 0:1, :].clone()
         for t in range(self.max_dec_seq_len):
             if t==0:
-                out_step, states_dec = self.decoder(torch.cat((in_, hidden_enc[:,-1,:].unsqueeze(1)), dim=2), None)  # (B, 1, H)
+                out_step, states_dec = self.decoder(torch.cat((in_, hidden_enc[:,-1,:].unsqueeze(1)), dim=2), None)  
             else:
                 # input for next input
                 in_ = DEC_IN[:, t, :].unsqueeze(1).clone()
@@ -246,9 +245,9 @@ class Attention_Seq2Seq(nn.Module):
 
                 in_ = torch.cat((in_, torch.bmm(att_scores.unsqueeze(1), hidden_enc)), dim=2)
                 # Output
-                out_step, states_dec = self.decoder(in_, states_dec)  # (B, 1, H)
+                out_step, states_dec = self.decoder(in_, states_dec)  
 
-            logits_step = self.fc(out_step.squeeze(1))            # (B, V)
+            logits_step = self.fc(out_step.squeeze(1))          
             final_out[:, t, :] = logits_step
    
         return final_out
@@ -272,15 +271,15 @@ class Attention_Seq2Seq(nn.Module):
 
         for t in range(self.max_dec_seq_len):
             if t==0:
-                out_step, states_dec = self.decoder(torch.cat((in_, hidden_enc[:,-1,:].unsqueeze(1)), dim=2), None)  # (B, 1, H)
+                out_step, states_dec = self.decoder(torch.cat((in_, hidden_enc[:,-1,:].unsqueeze(1)), dim=2), None)  
             else:
-                out_step, states_dec = self.decoder(in_, states_dec)  # (B, 1, H)
+                out_step, states_dec = self.decoder(in_, states_dec)  
 
-            logits_step = self.fc(out_step.squeeze(1))            # (B, V)
+            logits_step = self.fc(out_step.squeeze(1))            
             final_out[:, t, :] = logits_step
 
             # Greedy argmax for next input
-            top1 = torch.argmax(logits_step, dim=1)               # (B,)
+            top1 = torch.argmax(logits_step, dim=1)               
             in_ = torch.zeros(batch_size, 1, len(self.output_index_token), device=self.device)
             in_[torch.arange(batch_size), 0, top1] = 1.0
             att_scores = self.attention(out_step, hidden_enc, mask_)
@@ -323,7 +322,7 @@ def validate_seq2seq(model, val_loader, device, val_type = "greedy", beam_width=
                 decoder_output = model.predict_beam_search(batch, beam_width=beam_width)
 
             #print(decoder_output.shape)
-            pred_tokens = decoder_output.argmax(dim=2)#.view(DEC_OUT.size(0), DEC_OUT.size(1))
+            pred_tokens = decoder_output.argmax(dim=2)
             true_tokens = DEC_OUT.argmax(dim=2)
             #print(pred_tokens.shape)
             #print(true_tokens.shape)
