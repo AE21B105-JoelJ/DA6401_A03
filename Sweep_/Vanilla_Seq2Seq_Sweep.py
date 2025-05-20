@@ -403,10 +403,6 @@ def train_seq2seq(model, train_loader, val_loader, optimizer, num_epochs, device
     if run is not None:
         run.summary["max_val_char_acc"] = max_val_char_acc
         run.summary["max_val_word_acc"] = max_val_word_acc
-        #for beam_size in beam_sizes:
-        #    val_loss, val_acc, val_word_acc = validate_seq2seq(model, val_loader, device, val_type="beam", beam_width=beam_size)
-        #    run.summary[f"max_val_char_acc_bs_{beam_size}"] = val_acc
-        #    run.summary[f"max_val_word_acc_bs_{beam_size}"] = val_word_acc
         
         
 
