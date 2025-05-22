@@ -45,4 +45,61 @@ the additional supported arguents are as follows (both types attention and non-a
 - "--pre_trained" to tell whether to use pretrained
 
 # Organization of the Repository
-
+.
+├── Attention_notebook.ipynb
+├── Att_Weights
+│   ├── C1.png
+│   ├── C2.png
+│   ├── C3.png
+│   ├── FIG10.png
+│   ├── FIG1.png
+│   ├── FIG2.png
+│   ├── FIG3.png
+│   ├── FIG4.png
+│   ├── FIG5.png
+│   ├── FIG6.png
+│   ├── FIG7.png
+│   ├── FIG8.png
+│   └── FIG9.png
+├── Base_notebook.ipynb
+├── Connectivity_Img
+│   ├── C1.png
+│   ├── C2.png
+│   ├── C3.png
+│   ├── C4.png
+│   ├── C5.png
+│   ├── FIG_10.png
+│   ├── FIG_1.png
+│   ├── FIG_2.png
+│   ├── FIG_3.png
+│   ├── FIG_4.png
+│   ├── FIG_5.png
+│   ├── FIG_6.png
+│   ├── FIG_7.png
+│   ├── FIG_8.png
+│   └── FIG_9.png
+├── DA6401_A3_AE21B105.pdf
+├── LICENSE
+├── predictions_attention
+│   └── Attention_predictions_test.csv
+├── predictions_vanilla
+│   └── Vanilla_predictions_test.csv
+├── pretrained
+│   ├── Attention_Best_model.pth
+│   ├── Attention_weights.pth
+│   └── Vanilla_Best_model.pth
+├── README.md
+├── Report_Files
+│   ├── ATT_WEIGHTS.ipynb
+│   ├── REPORT_ATTENTION_TEST.ipynb
+│   └── REPORT_VANILLA_TEST.ipynb
+├── Sweep_
+│   ├── Attention_Seq2Seq_Sweep.py
+│   └── Vanilla_Seq2Seq_Sweep.py
+├── ta_lexicons
+│   ├── ta.translit.sampled.dev.tsv
+│   ├── ta.translit.sampled.test.tsv
+│   └── ta.translit.sampled.train.tsv
+├── train_attention.py
+├── train_vanilla.py
+└── Vanilla_report_.ipynb
