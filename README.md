@@ -29,7 +29,7 @@ python train_vanilla.py --wandb_project project_name --wandb_entity entity_name
 If you want to train the model and save it in the pretrained folder and add the path to the script as required.
 
 ```
-python train_vanilla.py --wandb_project project_name --wandb_entity entity_name --pre_trained False
+python train_vanilla.py --wandb_project project_name --wandb_entity entity_name --pre_trained ""
 ```
 
 the additional supported arguents are as follows (both types attention and non-attention)
