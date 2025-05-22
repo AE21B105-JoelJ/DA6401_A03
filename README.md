@@ -3,6 +3,7 @@
 
 # Links to Report and Project
 GitHub Link : https://github.com/AE21B105-JoelJ/DA6401_A03.git
+
 WandB Link : https://api.wandb.ai/links/A3_DA6401_DL/t5ookbc5
 
 # Packages Used
@@ -45,6 +46,7 @@ the additional supported arguents are as follows (both types attention and non-a
 - "--pre_trained" to tell whether to use pretrained
 
 # Organization of the Repository
+```bash
 .
 ├── Attention_notebook.ipynb
 ├── Att_Weights
@@ -103,3 +105,4 @@ the additional supported arguents are as follows (both types attention and non-a
 ├── train_attention.py
 ├── train_vanilla.py
 └── Vanilla_report_.ipynb
+```
