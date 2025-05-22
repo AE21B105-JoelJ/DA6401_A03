@@ -26,7 +26,7 @@ To run the code use the following code (The external parameters are defaulted to
 python train_vanilla.py --wandb_project project_name --wandb_entity entity_name
 ```
 
-If you want to train the model and save it in the pretrained folder and add the path to the script as required.
+If you want to train the model use the following command
 
 ```
 python train_vanilla.py --wandb_project project_name --wandb_entity entity_name --pre_trained ""
